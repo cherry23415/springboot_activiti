@@ -30,3 +30,6 @@
   
     static/editor-app/app-cfg.js文件中的contextRoot表示activiti modeler相关接口都需要增加这个路径
     可见activiti.modeler包中的三个类，都在类上增加该路径
+    editor-app可直接从activiti 5.22的explorer中复制
+    
+http://localhost:8090/druid/index.html可访问druid监控
