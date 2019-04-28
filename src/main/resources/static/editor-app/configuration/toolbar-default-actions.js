@@ -43,7 +43,8 @@ KISBPM.TOOLBAR = {
 
                 // Force refresh of selection, might be that the undo command
                 // impacts properties in the selected item
-                if (services.$rootScope && services.$rootScope.forceSelectionRefresh) {
+                if (services.$rootScope && services.$rootScope.forceSelectionRefresh)
+                {
                     services.$rootScope.forceSelectionRefresh = true;
                 }
 
@@ -64,12 +65,14 @@ KISBPM.TOOLBAR = {
             }
 
             var toggleUndo = false;
-            if (services.$scope.undoStack.length == 0) {
+            if (services.$scope.undoStack.length == 0)
+            {
                 toggleUndo = true;
             }
 
             var toggleRedo = false;
-            if (services.$scope.redoStack.length > 0) {
+            if (services.$scope.redoStack.length > 0)
+            {
                 toggleRedo = true;
             }
 
@@ -101,7 +104,8 @@ KISBPM.TOOLBAR = {
 
                 // Force refresh of selection, might be that the redo command
                 // impacts properties in the selected item
-                if (services.$rootScope && services.$rootScope.forceSelectionRefresh) {
+                if (services.$rootScope && services.$rootScope.forceSelectionRefresh)
+                {
                     services.$rootScope.forceSelectionRefresh = true;
                 }
 
@@ -186,11 +190,13 @@ KISBPM.TOOLBAR = {
 
             var enableAdd = !dockerPlugin.enabledAdd();
             dockerPlugin.setEnableAdd(enableAdd);
-            if (enableAdd) {
+            if (enableAdd)
+            {
                 dockerPlugin.setEnableRemove(false);
                 document.body.style.cursor = 'pointer';
             }
-            else {
+            else
+            {
                 document.body.style.cursor = 'default';
             }
         },
@@ -201,11 +207,13 @@ KISBPM.TOOLBAR = {
 
             var enableRemove = !dockerPlugin.enabledRemove();
             dockerPlugin.setEnableRemove(enableRemove);
-            if (enableRemove) {
+            if (enableRemove)
+            {
                 dockerPlugin.setEnableAdd(false);
                 document.body.style.cursor = 'pointer';
             }
-            else {
+            else
+            {
                 document.body.style.cursor = 'default';
             }
         },
@@ -252,7 +260,7 @@ KISBPM.TOOLBAR = {
             KISBPM.TOOLBAR.ACTIONS._getOryxArrangmentPlugin(services.$scope).alignShapes([ORYX.CONFIG.EDITOR_ALIGN_SIZE]);
         },
 
-        closeEditor: function (services) {
+        closeEditor: function(services) {
             window.location.href = "./";
         },
 
@@ -284,7 +292,7 @@ KISBPM.TOOLBAR = {
 };
 
 /** Custom controller for the save dialog */
-var SaveModelCtrl = ['$rootScope', '$scope', '$http', '$route', '$location',
+var SaveModelCtrl = [ '$rootScope', '$scope', '$http', '$route', '$location',
     function ($rootScope, $scope, $http, $route, $location) {
 
         var modelMetaData = $scope.editor.getModelMetaData();
@@ -294,10 +302,8 @@ var SaveModelCtrl = ['$rootScope', '$scope', '$http', '$route', '$location',
             description = modelMetaData.description;
         }
 
-        var saveDialog = {
-            'name': modelMetaData.name,
-            'description': description
-        };
+        var saveDialog = { 'name' : modelMetaData.name,
+            'description' : description};
 
         $scope.saveDialog = saveDialog;
 
@@ -319,7 +325,7 @@ var SaveModelCtrl = ['$rootScope', '$scope', '$http', '$route', '$location',
         };
 
         $scope.saveAndClose = function () {
-            $scope.save(function () {
+            $scope.save(function() {
                 window.location.href = "./";
             });
         };
@@ -370,14 +376,11 @@ var SaveModelCtrl = ['$rootScope', '$scope', '$http', '$route', '$location',
             };
 
             // Update
-            $http({
-                method: 'PUT',
+            $http({    method: 'PUT',
                 data: params,
                 ignoreErrors: true,
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-                },
+                headers: {'Accept': 'application/json',
+                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
                 transformRequest: function (obj) {
                     var str = [];
                     for (var p in obj) {
@@ -385,8 +388,7 @@ var SaveModelCtrl = ['$rootScope', '$scope', '$http', '$route', '$location',
                     }
                     return str.join("&");
                 },
-                url: KISBPM.URL.putModel(modelMetaData.modelId)
-            })
+                url: KISBPM.URL.putModel(modelMetaData.modelId)})
 
                 .success(function (data, status, headers, config) {
                     $scope.editor.handleEvents({
@@ -415,6 +417,7 @@ var SaveModelCtrl = ['$rootScope', '$scope', '$http', '$route', '$location',
                     if (successCallback) {
                         successCallback();
                     }
+
                 })
                 .error(function (data, status, headers, config) {
                     $scope.error = {};
