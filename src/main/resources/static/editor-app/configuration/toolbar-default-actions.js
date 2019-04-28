@@ -415,22 +415,6 @@ var SaveModelCtrl = ['$rootScope', '$scope', '$http', '$route', '$location',
                     if (successCallback) {
                         successCallback();
                     }
-
-                    $http({
-                        method: 'GET',
-                        ignoreErrors: true,
-                        headers: {
-                            'Accept': 'text/html',
-                            'Content-Type': 'text/html; charset=UTF-8'
-                        },
-                        transformRequest: function (obj) {
-                            var str = [];
-                            for (var p in obj) {
-                                str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-                            }
-                            return str.join("&");
-                        }
-                    })
                 })
                 .error(function (data, status, headers, config) {
                     $scope.error = {};

@@ -18,7 +18,7 @@ import java.io.InputStream;
  * @author lyz
  */
 @RestController
-@RequestMapping("/model")
+@RequestMapping("/design/model")
 public class ModelController {
 
     @Autowired
