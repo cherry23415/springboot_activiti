@@ -23,3 +23,10 @@
  或执行：java -jar XXX.jar --spring.profiles.active=dev
 
 ```
+
+### 部分目录说明：
+  static/diagram-viewer为流程图跟踪的文件
+  static/editor-app为自定义流程图的相关文件
+  
+    static/editor-app/app-cfg.js文件中的contextRoot表示activiti modeler相关接口都需要增加这个路径
+    可见activiti.modeler包中的三个类，都在类上增加该路径
