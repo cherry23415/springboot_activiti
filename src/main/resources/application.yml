@@ -1,0 +1,42 @@
+#公共配置
+spring:
+  profiles:
+    active: local
+  activiti:
+    check-process-definitions: false
+    historyLevel: full
+    jobExecutorActivate: true
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  jackson:
+    default-property-inclusion: non_null
+mybatis:
+  type-aliases-package: com.miz.ying.model
+  mapper-locations: classpath:mapper/*.xml
+---
+#local环境
+spring:
+  profiles: local
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/activiti_test?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+domain: http://localhost:8090
+server:
+  port: 8090
+---
+#dev环境
+spring:
+  profiles: dev
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/activiti_test?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+domain: http://localhost:8888
+server:
+  port: 8888
