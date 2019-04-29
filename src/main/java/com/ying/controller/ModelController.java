@@ -41,7 +41,7 @@ public class ModelController {
      *
      * @param actModel
      */
-    @RequestMapping(value = "add", method = RequestMethod.POST)
+    @PostMapping("add")
     public BaseRespDto createModel(@RequestBody ActModel actModel) {
         try {
             if (actModel == null
@@ -51,14 +51,6 @@ public class ModelController {
                 return new BaseRespDto(BaseResultEnum.PARAMETER_ERROR);
             }
 
-            //流程分类参数校验
-            try {
-                if (Integer.parseInt(actModel.getCategory()) <= 0) {
-                    return new BaseRespDto(BaseResultEnum.PARAMETER_ERROR);
-                }
-            } catch (Exception e) {
-                return new BaseRespDto(BaseResultEnum.PARAMETER_ERROR);
-            }
             actModel.setKey(modelService.generateModelKey(actModel.getName()));
             String modelId = modelService.createModel(actModel);
             StringBuffer sb = new StringBuffer();
@@ -75,7 +67,7 @@ public class ModelController {
      *
      * @param processDefinitionId
      */
-    @RequestMapping(value = "convert/{processDefinitionId}", method = RequestMethod.GET)
+    @GetMapping("convert/{processDefinitionId}")
     public BaseRespDto convertToModel(@PathVariable String processDefinitionId) {
         try {
             if (StringUtils.isEmpty(processDefinitionId)) {
@@ -97,7 +89,7 @@ public class ModelController {
      *
      * @param modelId
      */
-    @RequestMapping(value = "get/{modelId}", method = RequestMethod.GET)
+    @GetMapping("get/{modelId}")
     public BaseRespDto getModel(@PathVariable String modelId) {
         try {
             if (StringUtils.isEmpty(modelId)) {
@@ -118,7 +110,7 @@ public class ModelController {
      * @param modelId
      * @return
      */
-    @RequestMapping(value = "deploy/{modelId}", method = RequestMethod.GET)
+    @GetMapping("deploy/{modelId}")
     public BaseRespDto deployModel(@PathVariable String modelId) {
         try {
             if (StringUtils.isEmpty(modelId)) {
@@ -156,7 +148,7 @@ public class ModelController {
      *
      * @param modelId
      */
-    @RequestMapping(value = "del/{modelId}", method = RequestMethod.GET)
+    @GetMapping("del/{modelId}")
     public BaseRespDto delModel(@PathVariable String modelId) {
         try {
             if (StringUtils.isEmpty(modelId)) {
@@ -192,7 +184,7 @@ public class ModelController {
      *
      * @return
      */
-    @RequestMapping(value = "activity/list/{modelId}", method = RequestMethod.GET)
+    @GetMapping("activity/list/{modelId}")
     public BaseRespDto activityList(@PathVariable String modelId) {
         try {
             if (StringUtils.isEmpty(modelId)) {
