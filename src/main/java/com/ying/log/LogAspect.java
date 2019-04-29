@@ -40,8 +40,7 @@ public class LogAspect {
     public void doBefore(JoinPoint joinPoint) {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         try {
-            logger.info("interface request,interfaceUrl:" + request.getRequestURL().toString(),
-                    ",param:" + getParamJsonString(joinPoint));
+            logger.info("interface request,interfaceUrl:" + request.getRequestURL().toString() + ",param:" + getParamJsonString(joinPoint));
         } catch (Exception e) {
             //记录本地异常日志
             logger.error("==前置通知异常==");
@@ -58,8 +57,8 @@ public class LogAspect {
     public void doAfterReturning(JoinPoint joinPoint, Object returnValue) {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         try {
-            logger.info("interface response,interfaceUrl:" + request.getRequestURL().toString(),
-                    ",param:" + getParamJsonString(joinPoint), "response:" + JSON.toJSONString(returnValue));
+            logger.info("interface response,interfaceUrl:" + request.getRequestURL().toString()
+                    + ",param:" + getParamJsonString(joinPoint) + ",response:" + JSON.toJSONString(returnValue));
         } catch (Exception e) {
             //记录本地异常日志
             logger.error("==后置通知异常==");
@@ -77,8 +76,8 @@ public class LogAspect {
     public void doAfterThrowing(JoinPoint joinPoint, Exception e) {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         try {
-            logger.error("interface error,interfaceUrl:" + request.getRequestURL().toString(),
-                    ",param:" + getParamJsonString(joinPoint), "error:" + e.toString());
+            logger.error("interface error,interfaceUrl:" + request.getRequestURL().toString()
+                    + ",param:" + getParamJsonString(joinPoint) + "error:" + e.toString());
         } catch (Exception ex) {
             //记录本地异常日志
             logger.error("==异常通知异常==");
