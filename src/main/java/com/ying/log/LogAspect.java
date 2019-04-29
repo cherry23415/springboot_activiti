@@ -22,12 +22,12 @@ public class LogAspect {
     private static final Logger logger = LogManager.getLogger(LogAspect.class);
 
     //Controller层切点
-    @Pointcut("execution(* com.miz.ying.controller.*.*(..))")
+    @Pointcut("execution(* com.ying.controller.*.*(..))")
     public void controllerAspect() {
     }
 
     //Service层切点，用于异常抛出后拦截
-    @Pointcut("execution(* com.miz.ying.service.*.*(..))")
+    @Pointcut("execution(* com.ying.service.*.*(..))")
     public void serviceAspect() {
     }
 

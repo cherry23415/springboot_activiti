@@ -1,7 +1,8 @@
 package com.ying.config;
 
+import org.activiti.engine.*;
+import org.activiti.spring.ProcessEngineFactoryBean;
 import org.activiti.spring.SpringProcessEngineConfiguration;
-import org.activiti.spring.boot.ProcessEngineConfigurationConfigurer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -16,7 +17,7 @@ import javax.sql.DataSource;
  */
 @Configuration
 @ComponentScan("org.activiti.rest.diagram")
-public class ActivitiConfig implements ProcessEngineConfigurationConfigurer {
+public class ActivitiConfig {
 
     @Autowired
     private DataSource dataSource;
@@ -26,13 +27,51 @@ public class ActivitiConfig implements ProcessEngineConfigurationConfigurer {
         return new DataSourceTransactionManager(dataSource);
     }
 
-    @Override
-    public void configure(SpringProcessEngineConfiguration processEngineConfiguration) {
-        processEngineConfiguration.setEnableDatabaseEventLogging(true);
-        processEngineConfiguration.setProcessDefinitionCacheLimit(10);
-        processEngineConfiguration.setActivityFontName("宋体");
-        processEngineConfiguration.setLabelFontName("宋体");
-        processEngineConfiguration.setDataSource(dataSource);
-        processEngineConfiguration.setTransactionManager(transactionManager());
+    @Bean
+    public SpringProcessEngineConfiguration processEngineConfiguration() {
+        SpringProcessEngineConfiguration configuration = new SpringProcessEngineConfiguration();
+        configuration.setDataSource(dataSource);
+        configuration.setDatabaseSchemaUpdate(ProcessEngineConfiguration.DB_SCHEMA_UPDATE_TRUE);
+        configuration.setAsyncExecutorActivate(false);
+        configuration.setEnableDatabaseEventLogging(true);
+        configuration.setProcessDefinitionCacheLimit(10);
+        configuration.setActivityFontName("宋体");
+        configuration.setLabelFontName("宋体");
+        configuration.setTransactionManager(transactionManager());
+
+        return configuration;
     }
+
+    @Bean
+    public ProcessEngineFactoryBean processEngine() {
+        ProcessEngineFactoryBean processEngineFactoryBean = new ProcessEngineFactoryBean();
+        processEngineFactoryBean.setProcessEngineConfiguration(processEngineConfiguration());
+        return processEngineFactoryBean;
+    }
+
+    @Bean
+    public RepositoryService repositoryService() throws Exception {
+        return processEngine().getObject().getRepositoryService();
+    }
+
+    @Bean
+    public RuntimeService runtimeService() throws Exception {
+        return processEngine().getObject().getRuntimeService();
+    }
+
+    @Bean
+    public TaskService taskService() throws Exception {
+        return processEngine().getObject().getTaskService();
+    }
+
+    @Bean
+    public HistoryService historyService() throws Exception {
+        return processEngine().getObject().getHistoryService();
+    }
+
+    @Bean
+    public ManagementService managementService() throws Exception {
+        return processEngine().getObject().getManagementService();
+    }
+
 }

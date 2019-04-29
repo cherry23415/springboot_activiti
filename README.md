@@ -29,7 +29,7 @@
   static/editor-app为自定义流程图的相关文件
   
     static/editor-app/app-cfg.js文件中的contextRoot表示activiti modeler相关接口都需要增加这个路径
-    可见activiti.modeler包中的三个类，都在类上增加该路径
+    可见com.ying.controller.modeler包中的三个类，都在类上增加该路径(这三个类从activiti5.22的modeler源码中摘出)
     editor-app可直接从activiti 5.22的explorer中复制
     
 http://localhost:8090/druid/index.html可访问druid监控

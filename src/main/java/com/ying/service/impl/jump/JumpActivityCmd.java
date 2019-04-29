@@ -8,7 +8,8 @@ import org.activiti.engine.impl.pvm.process.ProcessDefinitionImpl;
 
 /**
  * 流程强制跳转
- * Created by lyz on 2018/1/15.
+ *
+ * @author lyz
  */
 public class JumpActivityCmd implements Command {
     private String activityId;
