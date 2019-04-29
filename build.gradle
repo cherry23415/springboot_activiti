@@ -98,4 +98,6 @@ dependencies {
 
     //guava
     compile "com.google.guava:guava:23.0"
+
+    compile "org.projectlombok:lombok"
 }
