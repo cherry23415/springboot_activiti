@@ -28,8 +28,12 @@
   static/diagram-viewer为流程图跟踪的文件
   static/editor-app为自定义流程图的相关文件
   
-    static/editor-app/app-cfg.js文件中的contextRoot表示activiti modeler相关接口都需要增加这个路径
-    可见com.ying.controller.modeler包中的三个类，都在类上增加该路径(这三个类从activiti5.22的modeler源码中摘出)
-    editor-app可直接从activiti 5.22的explorer中复制
+    1)进入源码文件中的modules\activiti-webapp-explorer2\src\main\webapp目录，
+    复制diagram-viewer、editor-app、modeler.html三个文件到springboot项目中的resources目录的static下。
+    2)解压activiti-5.22.0.zip，在Activiti-5.22.0的libs中找到activiti-modeler-5.22.0-sources.jar，
+    解压找到三个类，放在com.ying.controller.modeler包中，每个类上访问路径增加"/service"。
+    3)将源码路径modules\activiti-webapp-explorer2\src\main\resources\stencilset.json复制到项目中的resources目录下。
+    4)static/editor-app/app-cfg.js文件中的contextRoot改成"/service"
+    5)将日志改成了log4j2
     
 http://localhost:8090/druid/index.html可访问druid监控

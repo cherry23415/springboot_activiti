@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author lyz
  */
 @RestController
+//增加类访问路径
 @RequestMapping("/service")
 public class StencilsetRestResource {
   

@@ -31,9 +31,11 @@ import org.springframework.web.bind.annotation.RestController;
  * @author lyz
  */
 @RestController
+//增加类访问路径
 @RequestMapping("/service")
 public class ModelEditorJsonRestResource implements ModelDataJsonConstants {
 
+    //日志改成了log4j2
     protected static final Logger LOGGER = LogManager.getLogger(ModelEditorJsonRestResource.class);
 
     @Autowired

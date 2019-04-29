@@ -12,11 +12,8 @@
  */
 package com.ying.controller.modeler;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-
-import com.ying.log.LogAspect;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.activiti.editor.constants.ModelDataJsonConstants;
 import org.activiti.engine.ActivitiException;
 import org.activiti.engine.RepositoryService;
@@ -24,25 +21,21 @@ import org.activiti.engine.repository.Model;
 import org.apache.batik.transcoder.TranscoderInput;
 import org.apache.batik.transcoder.TranscoderOutput;
 import org.apache.batik.transcoder.image.PNGTranscoder;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 
 /**
  * @author lyz
  */
 @RestController
+//增加类访问路径
 @RequestMapping("/service")
 public class ModelSaveRestResource implements ModelDataJsonConstants {
 
@@ -53,25 +46,31 @@ public class ModelSaveRestResource implements ModelDataJsonConstants {
     @Autowired
     private ObjectMapper objectMapper;
 
+    //修改参数
     @RequestMapping(value = "/model/{modelId}/save", method = RequestMethod.PUT)
     @ResponseStatus(value = HttpStatus.OK)
-    public void saveModel(@PathVariable String modelId, @RequestBody MultiValueMap<String, String> values) {
+    public void saveModel(@PathVariable String modelId,
+                          @RequestParam("name") String name,
+                          @RequestParam("json_xml") String json_xml,
+                          @RequestParam("svg_xml") String svg_xml,
+                          @RequestParam("description") String description) {
         try {
+            //日志改成了log4j2
             logger.info("save model begin,modelId:" + modelId);
             Model model = repositoryService.getModel(modelId);
 
             ObjectNode modelJson = (ObjectNode) objectMapper.readTree(model.getMetaInfo());
 
-            modelJson.put(MODEL_NAME, values.getFirst("name"));
-            modelJson.put(MODEL_DESCRIPTION, values.getFirst("description"));
+            modelJson.put(MODEL_NAME, name);
+            modelJson.put(MODEL_DESCRIPTION, description);
             model.setMetaInfo(modelJson.toString());
-            model.setName(values.getFirst("name"));
+            model.setName(name);
 
             repositoryService.saveModel(model);
 
-            repositoryService.addModelEditorSource(model.getId(), values.getFirst("json_xml").getBytes("utf-8"));
+            repositoryService.addModelEditorSource(model.getId(), json_xml.getBytes("utf-8"));
 
-            InputStream svgStream = new ByteArrayInputStream(values.getFirst("svg_xml").getBytes("utf-8"));
+            InputStream svgStream = new ByteArrayInputStream(svg_xml.getBytes("utf-8"));
             TranscoderInput input = new TranscoderInput(svgStream);
 
             PNGTranscoder transcoder = new PNGTranscoder();
