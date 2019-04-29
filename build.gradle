@@ -84,10 +84,6 @@ dependencies {
         exclude group: 'org.slf4j'
         exclude group: 'org.springframework.security'
     }
-    compile("org.activiti:activiti-spring-boot-starter-actuator:$activitiVersion") {
-        exclude group: 'org.slf4j'
-        exclude group: 'org.springframework.security'
-    }
     compile "org.vaadin.addons:dcharts-widget:0.10.0"
     compile "javax.servlet:jstl:1.2"
 

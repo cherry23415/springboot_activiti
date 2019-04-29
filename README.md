@@ -37,3 +37,7 @@
     5)将日志改成了log4j2
     
 http://localhost:8090/druid/index.html可访问druid监控
+
+### 项目说明：
+    controller写了几个modeler创建流程，发布流程，查看流程图的接口；具体流程的启动相关接口在actService
+    中，没有写controller，需要根据业务定制。
