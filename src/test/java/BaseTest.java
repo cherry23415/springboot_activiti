@@ -1,9 +1,11 @@
 import com.ying.SpringbootActivitiApplication;
+import com.ying.dto.resp.BaseRespDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
 /**
@@ -19,7 +21,9 @@ public class BaseTest {
 
     @Test
     public void getName() {
-        String name = restTemplate.getForObject("/design/model/view/1", String.class);
-        System.out.println(name);
+//        String name = restTemplate.getForObject("/design/model/view/1", String.class);
+//        System.out.println(name);
+        ResponseEntity<BaseRespDto> b = restTemplate.getForEntity("/design/model/activity/list/1", BaseRespDto.class);
+        System.out.println(b.getBody().getData());
     }
 }
