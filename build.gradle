@@ -1,4 +1,4 @@
-group 'maiz.erp'
+group 'com.ying'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'

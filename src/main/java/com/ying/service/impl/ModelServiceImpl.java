@@ -146,20 +146,6 @@ public class ModelServiceImpl implements IModelService {
         return actService.getModelImage(modelId);
     }
 
-    private String getDescByMeta(String metaInfo) throws Exception {
-        if (StringUtils.isEmpty(metaInfo)) {
-            return null;
-        }
-        JSONObject jsonObject = JSONObject.parseObject(metaInfo);
-        if (jsonObject == null) {
-            return null;
-        }
-        if (jsonObject.get("description") == null) {
-            return null;
-        }
-        return jsonObject.get("description").toString();
-    }
-
     @Override
     public boolean deleteModel(String modelId) throws Exception {
         if (repositoryService.getModel(modelId) != null) {

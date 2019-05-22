@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author lyz
  */
 @RestController
-@RequestMapping("proc")
+@RequestMapping("design/proc")
 public class ProcessController {
 
     @Autowired
