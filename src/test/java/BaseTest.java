@@ -1,5 +1,6 @@
 import com.ying.SpringbootActivitiApplication;
 import com.ying.dto.resp.BaseRespDto;
+import com.ying.model.ActModel;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +21,19 @@ public class BaseTest {
     private TestRestTemplate restTemplate;
 
     @Test
-    public void getName() {
+    public void testGet() {
 //        String name = restTemplate.getForObject("/design/model/view/1", String.class);
 //        System.out.println(name);
         ResponseEntity<BaseRespDto> b = restTemplate.getForEntity("/design/model/activity/list/1", BaseRespDto.class);
+        System.out.println(b.getBody().getData());
+    }
+
+    @Test
+    public void testPost() {
+        ActModel a = new ActModel();
+        a.setName("cherryTest");
+        a.setCategory("1");
+        ResponseEntity<BaseRespDto> b = restTemplate.postForEntity("/design/model/add", a, BaseRespDto.class);
         System.out.println(b.getBody().getData());
     }
 }
