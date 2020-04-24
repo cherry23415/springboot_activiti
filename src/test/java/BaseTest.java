@@ -20,7 +20,7 @@ public class BaseTest {
     @Autowired
     private TestRestTemplate restTemplate;
 
-    @Test
+//    @Test
     public void testGet() {
 //        String name = restTemplate.getForObject("/design/model/view/1", String.class);
 //        System.out.println(name);
@@ -28,7 +28,7 @@ public class BaseTest {
         System.out.println(b.getBody().getData());
     }
 
-    @Test
+//    @Test
     public void testPost() {
         ActModel a = new ActModel();
         a.setName("cherryTest");

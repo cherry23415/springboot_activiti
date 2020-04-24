@@ -6,6 +6,8 @@ spring:
     check-process-definitions: false
     historyLevel: full
     jobExecutorActivate: true
+    database-schema-update: true
+    async-executor-activate: false
   http:
     encoding:
       charset: UTF-8
@@ -21,10 +23,10 @@ mybatis:
 spring:
   profiles: local
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/activiti_test?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull
+    url: jdbc:mysql://127.0.0.1:3306/activiti_test?characterEncoding=UTF-8&useUnicode=true&useSSL=true&serverTimezone=UTC
     username: root
-    password: 123456
-    driver-class-name: com.mysql.jdbc.Driver
+    password: ying
+    driver-class-name: com.mysql.cj.jdbc.Driver
 domain: http://localhost:8090
 server:
   port: 8090
@@ -33,10 +35,10 @@ server:
 spring:
   profiles: dev
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/activiti_test?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull
+    url: jdbc:mysql://127.0.0.1:3306/activiti_test?characterEncoding=UTF-8&useUnicode=true&useSSL=true&serverTimezone=UTC
     username: root
-    password: 123456
-    driver-class-name: com.mysql.jdbc.Driver
+    password: ying
+    driver-class-name: com.mysql.cj.jdbc.Driver
 domain: http://localhost:8888
 server:
   port: 8888

@@ -18,7 +18,7 @@ targetCompatibility = 1.8
 
 buildscript {
     ext {
-        springbootVersion = "2.0.0.RELEASE"
+        springbootVersion = "2.1.7.RELEASE"
     }
     repositories {
         mavenCentral()
@@ -63,9 +63,9 @@ dependencies {
     compile "org.aspectj:aspectjweaver:1.8.9"
 
     //mysql
-    compile('mysql:mysql-connector-java:5.1.9')
+    compile('mysql:mysql-connector-java:8.0.17')
     //数据库连接池
-    compile "com.alibaba:druid-spring-boot-starter:1.1.0"
+    compile "com.alibaba:druid-spring-boot-starter:1.1.21"
     //avtiviti相关
     compile("org.activiti:activiti-rest:$activitiVersion") {
         exclude group: 'org.slf4j'
